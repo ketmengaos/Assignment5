@@ -153,6 +153,7 @@ public class Tree<K extends Comparable,D> {
             Scanner input = new Scanner(new FileReader("Bible"));
 
             Tree<String, Integer> firstTree = new Tree<String, Integer>();
+            Tree<Integer, String> secondTree = new Tree<Integer, String>();
 
             while(input.hasNextLine()) {
                 word = input.nextLine();
@@ -166,6 +167,10 @@ public class Tree<K extends Comparable,D> {
                         firstTree.modify(line[i], newValue);
                     }
                 }
+            }
+
+            while(input.hasNextLine()) {
+
             }
 
         } catch (FileNotFoundException e) {
