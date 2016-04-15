@@ -21,7 +21,7 @@ public class Tree<K extends Comparable,D> {
                 buildTree(keys, data, m+1, hi));
     }
 
-    //Standard methods for BSTs.
+    //Standard Database Operators.
 
     private D find(K key, Node<K,D> x) {
         if(x == null)
@@ -148,27 +148,29 @@ public class Tree<K extends Comparable,D> {
 
         try {
             String word;
+            int newValue;
 
-            Scanner input = new Scanner(new FileReader("Bible.txt"));
+            Scanner input = new Scanner(new FileReader("Bible"));
 
             Tree<String, Integer> firstTree = new Tree<String, Integer>();
 
             while(input.hasNextLine()) {
                 word = input.nextLine();
-
                 String[] line = word.split("[ ]");
-                //Integer[] count = ;
+
                 for(int i = 0; i < line.length; i++) {
                     if (firstTree.find(line[i]) == null)
                         firstTree.add(line[i], 1);
+                    else {
+                        newValue = firstTree.find(line[i]) + 1;
+                        firstTree.modify(line[i], newValue);
+                    }
                 }
-
-
-                Tree<String, Integer> tree = new Tree<String, Integer>(line, count);
             }
 
         } catch (FileNotFoundException e) {
             System.out.println("Error Found: " + e);
+            System.exit(0);
         }
 
     }

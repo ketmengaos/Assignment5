@@ -4,8 +4,7 @@ public class Node<K extends Comparable,D> {
 
     public Node<K,D> left, right;
 
-    public Node(K k, D d,
-                Node<K,D> l,Node <K,D> r) {
+    public Node(K k, D d,Node<K,D> l,Node <K,D> r) {
         key = k; data = d; left = l; right = r;
     }
 
