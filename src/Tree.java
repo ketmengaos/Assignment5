@@ -81,19 +81,6 @@ public class Tree<K extends Comparable,D> {
         modify(key, data, root);
     }
 
-    private String toString(Node<K,D> root) {
-        if(root == null)
-            return "";
-        return toString(root.left)
-                + "(" + root.key + ","
-                + root.data + ")"
-                + toString(root.right);
-    }
-
-    public String toString() {
-        return toString(root);
-    }
-
     private Node<K,D> findLeftmost(Node<K,D> root) {
         // Assumes root != null.
         return root.left == null
@@ -144,6 +131,30 @@ public class Tree<K extends Comparable,D> {
         root = delete(key, root);
     }
 
+    private String toString(Node<K,D> root) {
+        if(root == null)
+            return "";
+        return toString(root.left)
+                + "(" + root.key + "," + root.data + ")"
+                + toString(root.right);
+    }
+    public String toString() {
+        return toString(root);
+    }
+
+    private Node<K, D> cycleThrough(Node<K, D> root) {
+        if (root == null)
+            return null;
+        cycleThrough(root.left);
+        if (root.right != null)
+            cycleThrough(root.right);
+        return root;
+    }
+
+    public Node<K, D> cycleThrough() {
+        return cycleThrough(root);
+    }
+
     public static void main(String[] args) {
 
         try {
@@ -169,9 +180,9 @@ public class Tree<K extends Comparable,D> {
                 }
             }
 
-            while(input.hasNextLine()) {
+            secondTree.add(cycleThrough().data, cycleThrough().key);
 
-            }
+            //System.out.println(firstTree.toString());
 
         } catch (FileNotFoundException e) {
             System.out.println("Error Found: " + e);
