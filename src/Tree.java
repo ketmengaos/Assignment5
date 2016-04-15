@@ -151,13 +151,16 @@ public class Tree<K extends Comparable,D> {
 
             Scanner input = new Scanner(new FileReader("Bible.txt"));
 
+            Tree<String, Integer> firstTree = new Tree<String, Integer>();
+
             while(input.hasNextLine()) {
                 word = input.nextLine();
 
                 String[] line = word.split("[ ]");
-                Integer[] count = ;
+                //Integer[] count = ;
                 for(int i = 0; i < line.length; i++) {
-                    if (line[i] )
+                    if (firstTree.find(line[i]) == null)
+                        firstTree.add(line[i], 1);
                 }
 
 
