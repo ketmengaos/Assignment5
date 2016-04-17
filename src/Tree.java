@@ -1,8 +1,3 @@
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.io.*;
-
 public class Tree<K extends Comparable,D> {
 
     private Node<K,D> root;
@@ -45,12 +40,12 @@ public class Tree<K extends Comparable,D> {
         if(root == null)
             return new Node<K,D>(key,data);
         int c = key.compareTo(root.key);
-        if(c == 0) {
-            System.err.println("Error: duplicate key: "+key);
-            System.exit(1);
-            return null;
-        }
-        else if(c < 0) {
+//        if(c == 0) {
+//            System.err.println("Error: duplicate key: "+key);
+//            System.exit(1);
+//            return null;
+//        }
+        if(c <= 0) {
             root.left =  add(key, data, root.left);
             return root;
         }
@@ -151,45 +146,5 @@ public class Tree<K extends Comparable,D> {
 
     public String toString() {
         return toString(root);
-    }
-
-    public static void main(String[] args) {
-
-        try {
-            String word;
-            int newValue;
-
-            Scanner input = new Scanner(new FileReader("Bible"));
-
-            Tree<String, Integer> firstTree = new Tree<String, Integer>();
-            Tree<Integer, String> secondTree = new Tree<Integer, String>();
-
-            while(input.hasNextLine()) {
-                word = input.nextLine();
-                String[] line = word.split("[ ]");
-
-                for(int i = 0; i < line.length; i++) {
-                    if (firstTree.find(line[i]) == null) {
-                        firstTree.add(line[i], 1);
-//                        System.out.println(line[i]);
-                    }
-                    else {
-                        newValue = firstTree.find(line[i]) + 1;
-                        firstTree.modify(line[i], newValue);
-                    }
-                }
-            }
-
-            System.out.println(firstTree);
-            String[] treeOne = firstTree.toString().split("[ ]");
-
-            System.out.println(Arrays.toString(treeOne));
-            //secondTree.add();
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Error Found: " + e);
-            System.exit(0);
-        }
-
     }
 }
