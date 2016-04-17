@@ -45,7 +45,7 @@ public class Tree<K extends Comparable,D> {
 //            System.exit(1);
 //            return null;
 //        }
-        if(c <= 0) {
+        if (c <= 0) {
             root.left =  add(key, data, root.left);
             return root;
         }
@@ -84,48 +84,51 @@ public class Tree<K extends Comparable,D> {
                 : findLeftmost(root.left);
     }
 
-    private Node<K,D> removeLeftmost(Node<K,D> root) {
-        if(root.left == null)
-            return root.right;
+    private Node<K,D> removeRightMost(Node<K,D> root) {
+        if(root.right == null)
+            return root;
         else {
-            root.left = removeLeftmost(root.left);
-            return root;
+            return removeRightMost(root.right);
         }
     }
 
-    private Node<K,D> delete(K key, Node<K,D> root) {
-        if(root == null) {
-            System.err.println("Error: key not found");
-            System.exit(1);
-            return null;
-        }
-        int c = key.compareTo(root.key);
-        if(c == 0) {
-            if(root.left == null)
-                return root.right;
-            else if(root.right == null)
-                return root.left;
-            else {
-                Node<K,D> t = root;
-                root = findLeftmost(root.right);
-                root.right = removeLeftmost(t.right);
-                root.left = t.left;
-                return root;
-            }
-        }
-        else if(c < 0) {
-            root.left = delete(key, root.left);
-            return root;
-        }
-        else { // c > 0
-            root.right = delete(key, root.right);
-            return root;
-        }
+    public D removeRightMost() {
+        return removeRightMost(root).data;
     }
 
-    public void delete(K key) {
-        root = delete(key, root);
-    }
+//    private Node<K,D> delete(K key, Node<K,D> root) {
+//        if(root == null) {
+//            System.err.println("Error: key not found");
+//            System.exit(1);
+//            return null;
+//        }
+//        int c = key.compareTo(root.key);
+//        if(c == 0) {
+//            if(root.left == null)
+//                return root.right;
+//            else if(root.right == null)
+//                return root.left;
+//            else {
+//                Node<K,D> t = root;
+//                root = findLeftmost(root.right);
+//                root.right = removeLeftmost(t.right);
+//                root.left = t.left;
+//                return root;
+//            }
+//        }
+//        else if(c < 0) {
+//            root.left = delete(key, root.left);
+//            return root;
+//        }
+//        else { // c > 0
+//            root.right = delete(key, root.right);
+//            return root;
+//        }
+//    }
+//
+//    public void delete(K key) {
+//        root = delete(key, root);
+//    }
 
 //    private String toString(Node<K,D> root) {
 //        if(root == null)
@@ -141,7 +144,7 @@ public class Tree<K extends Comparable,D> {
     private String toString(Node<K, D> root) {
         if(root == null)
             return "";
-        return toString(root.left) + root.key + " " + root.data + toString(root.right);
+        return toString(root.left) + " " + root.key + " " + root.data + toString(root.right);
     }
 
     public String toString() {

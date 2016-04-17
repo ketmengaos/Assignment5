@@ -13,11 +13,11 @@ public class Main {
             Scanner input = new Scanner(new FileReader("Bible"));
 
             Tree<String, Integer> firstTree = new Tree<String, Integer>();
-            Tree<String, String> secondTree = new Tree<String, String>();
+            Tree<Integer, String> secondTree = new Tree<Integer, String>();
 
             while(input.hasNextLine()) {
                 word = input.nextLine();
-                String[] line = word.split("[ ]");
+                String[] line = word.split("[ 0-9():;*,.?!\"]+");
 
                 for(int i = 0; i < line.length; i++) {
                     if (firstTree.find(line[i]) == null && !line[i].equals("")) {
@@ -31,13 +31,17 @@ public class Main {
             }
 
             System.out.println(firstTree);
-            String[] treeOne = firstTree.toString().replaceFirst("\\(", "").split("[ ().,;'\"]+");
+            String[] treeOne = firstTree.toString().trim().split("[ ]+");
 
             System.out.println(Arrays.toString(treeOne));
             for(int i = 0; i < treeOne.length; i = i + 2)
-                secondTree.add(treeOne[i+1], treeOne[i]);
+                secondTree.add(Integer.parseInt(treeOne[i+1]), treeOne[i]);
 
             System.out.println(secondTree);
+
+            for(int i = 0; i < 100; i++) {
+                System.out.println(secondTree.removeRightMost());
+            }
 
         } catch (FileNotFoundException e) {
             System.out.println("Error Found: " + e);
