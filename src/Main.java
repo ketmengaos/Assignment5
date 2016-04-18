@@ -40,7 +40,7 @@ public class Main {
             System.out.println(secondTree);
 
             for(int i = 0; i < 100; i++) {
-                System.out.println(secondTree.removeRightMost());
+                System.out.println(secondTree.removeRightMost().data);
             }
 
         } catch (FileNotFoundException e) {

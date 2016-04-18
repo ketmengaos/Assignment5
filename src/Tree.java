@@ -86,21 +86,23 @@ public class Tree<K extends Comparable, D> {
     }
 
     private Node<K, D> removeRightMost(Node<K, D> root) {
-        if(root.right == null)
-            if(root.left == null)
-                return root;
-            else {
-                Node<K,D> temp = root;
-
-                removeRightMost();
+        if(root.right.right == null) {
+            if(root.right.left != null) {
+                Node<K,D> temp = root.right;
+                root.right = root.right.left;
+                return temp;
             }
+            Node<K,D> temp = root.right;
+            root.right = null;
+            return temp;
+        }
         else {
             return removeRightMost(root.right);
         }
     }
 
-    public D removeRightMost() {
-        return removeRightMost(root).data;
+    public Node<K,D> removeRightMost() {
+        return removeRightMost(root);
     }
 
 //    private Node<K,D> delete(K key, Node<K,D> root) {
@@ -135,17 +137,6 @@ public class Tree<K extends Comparable, D> {
 //
 //    public void delete(K key) {
 //        root = delete(key, root);
-//    }
-
-//    private String toString(Node<K,D> root) {
-//        if(root == null)
-//            return "";
-//        return toString(root.left)
-//                + "(" + root.key + "," + root.data + ")"
-//                + toString(root.right);
-//    }
-//    public String toString() {
-//        return toString(root);
 //    }
 
     private String toString(Node<K, D> root) {
