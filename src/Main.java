@@ -30,7 +30,7 @@ public class Main {
 
             while(input.hasNextLine()) {
                 word = input.nextLine();
-                String[] line = word.split("[ 0-9():;*,.?!\"]+"); //Should've been all non-whitespace, i know.
+                String[] line = word.split("[ 0-9():;*,.?!\"]+"); //Should've been all non-whitespace, I know. I'm a stickler for semantics.
 
                 for(int i = 0; i < line.length; i++) {
                     if (firstTree.find(line[i]) == null && !line[i].equals("")) {
@@ -50,7 +50,7 @@ public class Main {
             for(int i = 0; i < treeOne.length; i = i + 2)
                 secondTree.add(Integer.parseInt(treeOne[i+1]), treeOne[i]);
 
-            //System.out.println(secondTree); //Prints out the second tree in BST format.
+            //System.out.println(secondTree); //Prints out the second tree in BST format. Debugging.
 
             for(int i = 0; i < 100; i++) {
                 System.out.println(secondTree.removeRightMost().data);

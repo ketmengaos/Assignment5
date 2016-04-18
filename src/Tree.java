@@ -42,11 +42,6 @@ public class Tree<K extends Comparable, D> {
         if (root == null)
             return new Node<K, D>(key, data);
         int c = key.compareTo(root.key);
-//        if(c == 0) {
-//            System.err.println("Error: duplicate key: "+key);
-//            System.exit(1);
-//            return null;
-//        }
         if (c <= 0) {
             root.left = add(key, data, root.left);
             return root;
