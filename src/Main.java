@@ -1,3 +1,16 @@
+//**********************************************************************************
+//******** || Ket-Meng Jimmy Cheng ~ April 17, 2016 ~ BST Assignment # 5 || ********
+//******** || ---------------------------------------------------------- || ********
+//******** || This program reads from an input: the Bible. From this,    || ********
+//******** || the program lists the top 100 words ordered by usage       || ********
+//******** || by creating two Binary Search Trees: the first to list the || ********
+//******** || words and increase the counter every time the word is used || ********
+//******** || and the second, which is constructed to list the usage and || ********
+//******** || words in order.                                            || ********
+//**********************************************************************************
+
+//All code is hosted at github.com/ketmengaos.
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
@@ -17,7 +30,7 @@ public class Main {
 
             while(input.hasNextLine()) {
                 word = input.nextLine();
-                String[] line = word.split("[ 0-9():;*,.?!\"]+");
+                String[] line = word.split("[ 0-9():;*,.?!\"]+"); //Should've been all non-whitespace, i know.
 
                 for(int i = 0; i < line.length; i++) {
                     if (firstTree.find(line[i]) == null && !line[i].equals("")) {
@@ -30,14 +43,14 @@ public class Main {
                 }
             }
 
-            System.out.println(firstTree);
-            String[] treeOne = firstTree.toString().trim().split("[ ]+");
+            //System.out.println(firstTree); //Prints out the first tree. Obviously. Used for debugging.
+            String[] treeOne = firstTree.toString().trim().split("[ ]+"); //Split the first BST by spaces.
 
-            System.out.println(Arrays.toString(treeOne));
+            //System.out.println(Arrays.toString(treeOne)); //Prints out the first tree in String[] format. Debugging.
             for(int i = 0; i < treeOne.length; i = i + 2)
                 secondTree.add(Integer.parseInt(treeOne[i+1]), treeOne[i]);
 
-            System.out.println(secondTree);
+            //System.out.println(secondTree); //Prints out the second tree in BST format.
 
             for(int i = 0; i < 100; i++) {
                 System.out.println(secondTree.removeRightMost().data);

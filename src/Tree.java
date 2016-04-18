@@ -78,13 +78,7 @@ public class Tree<K extends Comparable, D> {
         modify(key, data, root);
     }
 
-    private Node<K, D> findLeftmost(Node<K, D> root) {
-        // Assumes root != null.
-        return root.left == null
-                ? root
-                : findLeftmost(root.left);
-    }
-
+    //Customized removeRightMost to look for the top values. Recursively deletes and returns the rightmost value 100 times.
     private Node<K, D> removeRightMost(Node<K, D> root) {
         if(root.right.right == null) {
             if(root.right.left != null) {
@@ -104,40 +98,6 @@ public class Tree<K extends Comparable, D> {
     public Node<K,D> removeRightMost() {
         return removeRightMost(root);
     }
-
-//    private Node<K,D> delete(K key, Node<K,D> root) {
-//        if(root == null) {
-//            System.err.println("Error: key not found");
-//            System.exit(1);
-//            return null;
-//        }
-//        int c = key.compareTo(root.key);
-//        if(c == 0) {
-//            if(root.left == null)
-//                return root.right;
-//            else if(root.right == null)
-//                return root.left;
-//            else {
-//                Node<K,D> t = root;
-//                root = findLeftmost(root.right);
-//                root.right = removeLeftmost(t.right);
-//                root.left = t.left;
-//                return root;
-//            }
-//        }
-//        else if(c < 0) {
-//            root.left = delete(key, root.left);
-//            return root;
-//        }
-//        else { // c > 0
-//            root.right = delete(key, root.right);
-//            return root;
-//        }
-//    }
-//
-//    public void delete(K key) {
-//        root = delete(key, root);
-//    }
 
     private String toString(Node<K, D> root) {
         if (root == null)
