@@ -87,7 +87,13 @@ public class Tree<K extends Comparable, D> {
 
     private Node<K, D> removeRightMost(Node<K, D> root) {
         if(root.right == null)
-            return root;
+            if(root.left == null)
+                return root;
+            else {
+                Node<K,D> temp = root;
+
+                removeRightMost();
+            }
         else {
             return removeRightMost(root.right);
         }
